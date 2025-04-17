@@ -59,29 +59,32 @@ body { font-family: 'Nunito Sans', sans-serif; }
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80vh;
-            padding: 20px; /* Adiciona espaçamento lateral para telas menores */
+            height: auto; /* Evita que a altura ocupe demais em telas pequenas */
+            padding: 5vw; /* Espaçamento lateral proporcional ao tamanho da tela */
             box-sizing: border-box;
+            flex-direction: column; /* Empilha verticalmente se tiver mais conteúdo */
+            text-align: center;
         }
         
         .imagem-central {
             width: 100%;
-            max-width: 700px; /* Limite máximo de tamanho */
+            max-width: 700px;
             height: auto;
             display: block;
-            border-radius: 12px; /* opcional: deixa mais elegante */
+            border-radius: 12px;
             transition: transform 0.3s ease;
         }
         
         .imagem-central:hover {
             transform: scale(1.05);
         }
-          
+        
         .tituloaboutme {
             color: black;
-            font-size: 6vh;
+            font-size: clamp(28px, 5vw, 60px); /* Responsivo: se adapta ao tamanho da tela */
             font-family: "Nunito Sans", serif;
             text-align: center;
+            margin-bottom: 20px;
           }  
 
         .centralizar-subtitulo {
@@ -112,16 +115,33 @@ body { font-family: 'Nunito Sans', sans-serif; }
             }
         }
 
+/* Estilos para as imagens arredondadas */
 .imagem-arredondada {
     border-radius: 10px;
     filter: grayscale(100%);
     transition: transform 0.3s ease, filter 0.3s ease;
-  }
-  
-  .imagem-arredondada:hover {
+    margin: 10px; /* Adiciona margem para separar as imagens */
+    width: 100%;  /* Faz com que as imagens ocupem toda a largura disponível */
+    max-width: 300px; /* Limite máximo para o tamanho da imagem */
+    display: block;  /* Garante que a imagem seja exibida como bloco */
+}
+
+.imagem-arredondada:hover {
     transform: scale(1.05);
     filter: grayscale(0%);
-  }
+}
+
+/* Container para as imagens usando flexbox */
+.imagem-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 10px;
+    max-width: 1200px; /* Limite a largura máxima do container */
+    margin: 0 auto;    /* Centraliza o container na tela */
+    box-sizing: border-box;
+}
 
   .container {
     text-align: center;
@@ -188,3 +208,45 @@ footer {
     justify-content: center; 
 } 
 
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+    .imagem-arredondada {
+        max-width: 100%; /* Faz as imagens ocuparem 100% da largura do container em telas menores */
+    }
+
+    .imagem-container {
+        padding: 0 20px;
+    }
+}
+
+/* Responsividade para telas extra pequenas */
+@media (max-width: 480px) {
+    .imagem-arredondada {
+        max-width: 100%; /* Ajusta para imagens ocuparem toda a largura disponível */
+        margin: 5px; /* Menor margem em telas menores */
+    }
+
+    .imagem-container {
+        flex-direction: column; /* Coloca as imagens em uma coluna em telas muito pequenas */
+    }
+}
+@media (max-width: 768px) {
+    .centralizar {
+        padding: 20px 10px;
+    }
+
+    .imagem-central {
+        max-width: 90vw; /* Permite que a imagem use mais espaço da tela */
+    }
+}
+
+/* Ajuste extra para telas bem pequenas (celulares) */
+@media (max-width: 480px) {
+    .imagem-central {
+        max-width: 100vw;
+    }
+
+    .tituloaboutme {
+        font-size: clamp(24px, 6vw, 40px); /* Título mais legível em celulares */
+    }
+}
